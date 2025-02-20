@@ -31,7 +31,7 @@ const HeroSection = () => {
             </div>
             </div>
           
-            <div className="hero-section-img w-full mt-20" data-aos="fade-up-left">
+            <div className="hero-section-img mt-20" data-aos="fade-up-left">
             <img src={heroMain} alt="" className='' />
         </div>
         </div>

@@ -14,7 +14,7 @@ const NavBar = () => {
   }
   return (
     <>
-      <nav className='sticky top-0 z-50 px-20 text-black '>
+      <nav className='fixed top-0 z-50 w-full px-20 text-black '>
         <div className="flex justify-between items-center px-4 py-3 mx-auto relative navbar-main  ">
           <div className='flex items-center flex-shrink-0 flex-row '>
             <img src={logo} alt="" className='h-20 w-30 mr-2' />
@@ -54,7 +54,7 @@ const NavBar = () => {
               navItems.map((items, index) => (
                 <Link to={items.href} key={index}> 
                 <ul>
-                <li className='text-lg py-4  list-none' >{items.label}</li>
+                <Link to={items.href} key={index}>  <li className='py-4  list-none text-lg font-semibold' >{items.label}</li></Link>
                 </ul>
                 </Link>
               ))
