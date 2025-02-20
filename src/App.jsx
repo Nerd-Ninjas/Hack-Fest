@@ -10,7 +10,7 @@ function App() {
   return (
     <>
       <Router>
-        <div className="App">
+        <div className="App overflow-hidden" >
           <div className="landing-page">
             <TopBar />
             <div className="landing-content">
