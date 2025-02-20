@@ -6,10 +6,9 @@ import requests
 app = Flask(__name__)
 CORS(app)  
 
-API_KEY = "AIzaSyBJ5ibIkwm1koegM1kCFvq3XtyO-gKFbUI"
-youtube_api_key = "AIzaSyCjDu8-dniNWptu3nIamxakgs3ySDfrBPA"
+API_KEY = "AIzaSyDGw_PMvwBXacvyTHWF8JWBk_hL9DSP-vk"
+YOUTUBE_API_KEY = "AIzaSyBmlz5MQ1UJ7V6Evc9xgq4RXor5i9aOw3g"
 genai.configure(api_key=API_KEY)
-
 
 generation_config = {
     "temperature": 1.5,
