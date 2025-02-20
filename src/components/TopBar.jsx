@@ -1,8 +1,10 @@
 
 import { navItems } from './Constants'
-import logo from '../assets/main/navlogo.png'
+import logo from '../assets/main/logonerd.webp'
 import { Link } from 'react-router-dom'
 import { RiDashboardHorizontalLine } from "react-icons/ri";
+import { RiDashboardHorizontalFill } from "react-icons/ri";
+
 import { AiFillHome } from "react-icons/ai";
 import { useState } from 'react';
 import { Menu, X } from "lucide-react";
@@ -17,7 +19,7 @@ const NavBar = () => {
       <nav className='fixed top-0 z-50 w-full px-20 text-black '>
         <div className="flex justify-between items-center px-4 py-3 mx-auto relative navbar-main  ">
           <div className='flex items-center flex-shrink-0 flex-row '>
-            <img src={logo} alt="" className='h-20 w-30 mr-2' />
+            <img src={logo} alt="" className='h-10 w-15 mr-1' />
             <span className='text-2xl tracking-tight '>Nerd Learn</span>
           </div>
           <ul className='hidden lg:flex mr-20 space-x-12'>
@@ -31,7 +33,7 @@ const NavBar = () => {
 
             <Link to='/create'>
               <button className='hidden lg:flex text-white contact-btn p-3 text-xl mr-15 rounded-md duration-500  flex items-center'>
-              <p className='text-3xl'><RiDashboardHorizontalLine /></p><p className=''>Dashboard</p>
+              <p className='text-3xl'><RiDashboardHorizontalFill /></p><p className=''>Dashboard</p>
               </button>
             </Link>
            
