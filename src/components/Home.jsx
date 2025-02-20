@@ -2,6 +2,7 @@
 import About from './About'
 import Steps from './Steps'
 import HeroSection from './HeroSection'
+import { Courses } from './Courses'
 
 
 const Home = () => {
@@ -18,6 +19,10 @@ const Home = () => {
       </div>
       <div className="steps-involving">
         <Steps />
+      </div>
+      <div className='courses' >
+        <Courses/>
+
       </div>
     </>
   )
