@@ -9,6 +9,7 @@ import {
   } from "@material-tailwind/react";
   import { useState } from "react";
   import axios from "axios";
+  import { Select, Option } from "@material-tailwind/react";
   
   export function Course() {
     const [category, setCategory] = useState("");
@@ -43,41 +44,47 @@ import {
           </CardHeader>
           <CardBody>
             <div className="grid grid-cols-1 gap-4">
-              <Input
-                type="text"
-                label="Category"
-                color="gray"
-                value={category}
-                onChange={(e) => setCategory(e.target.value)}
-              />
-              <Input
-                type="text"
-                label="Topic"
-                color="gray"
-                value={topic}
-                onChange={(e) => setTopic(e.target.value)}
-              />
-              <Input
-                type="text"
-                label="Level"
-                color="gray"
-                value={level}
-                onChange={(e) => setLevel(e.target.value)}
-              />
-              <Input
-                type="text"
-                label="Duration"
-                color="gray"
-                value={duration}
-                onChange={(e) => setDuration(e.target.value)}
-              />
-              <Input
-                type="number"
-                label="Number of Chapters"
-                color="gray"
-                value={noOfChapters}
-                onChange={(e) => setNoOfChapters(e.target.value)}
-              />
+            <Select label="Category" value={category} onChange={(e) => setCategory(e.target.value)}>
+            <Option value="Technology">Technology</Option>
+            <Option value="Business">Business</Option>
+            <Option value="Health">Health</Option>
+            <Option value="Finance">Finance</Option>
+            <Option value="Education">Education</Option>
+          </Select>
+
+          {/* Topic Input */}
+          <Input
+            type="text"
+            label="Topic"
+            color="gray"
+            value={topic}
+            onChange={(e) => setTopic(e.target.value)}
+          />
+
+          {/* Level Selection */}
+          <Select label="Level" value={level} onChange={(e) => setLevel(e.target.value)}>
+            <Option value="Beginner">Beginner</Option>
+            <Option value="Intermediate">Intermediate</Option>
+            <Option value="Advanced">Advanced</Option>
+          </Select>
+
+          {/* Duration Selection */}
+          <Select label="Duration" value={duration} onChange={(e) => setDuration(e.target.value)}>
+            <Option value="30 minutes">30 minutes</Option>
+            <Option value="1 hour">1 hour</Option>
+            <Option value="2 hours">2 hours</Option>
+            <Option value="5 hours">5 hours</Option>
+            <Option value="10 hours">10 hours</Option>
+          </Select>
+
+          {/* Number of Chapters Input */}
+          <Input
+            type="number"
+            label="Number of Chapters"
+            color="gray"
+            value={noOfChapters}
+            onChange={(e) => setNoOfChapters(Number(e.target.value))}
+          />
             </div>
           </CardBody>
           <CardFooter className="flex justify-center">

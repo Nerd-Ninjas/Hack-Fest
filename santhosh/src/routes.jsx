@@ -22,25 +22,41 @@ export const routes = [
       {
         icon: <HomeIcon {...icon} />,
         name: "dashboard",
+<<<<<<< HEAD
         // path: "/",
+=======
+        // path: "/home",
+>>>>>>> 881ccf4d5cb406b6f2c01a54c34fe1f3ddd07a7c
         element: <Home />,
       },
       {
         icon: <UserCircleIcon {...icon} />,
         name: "profile",
+<<<<<<< HEAD
         // path: "/",
+=======
+        // path: "/profile",
+>>>>>>> 881ccf4d5cb406b6f2c01a54c34fe1f3ddd07a7c
         element: <Profile />,
       },
       {
         icon: <TableCellsIcon {...icon} />,
         name: "Report",
+<<<<<<< HEAD
         // path: "/",
+=======
+        // path: "/tables",
+>>>>>>> 881ccf4d5cb406b6f2c01a54c34fe1f3ddd07a7c
         element: <Tables />,
       },
       {
         icon: <InformationCircleIcon {...icon} />,
         name: "Learning Path",
+<<<<<<< HEAD
         // path: "/",
+=======
+        // path: "/learning-path",
+>>>>>>> 881ccf4d5cb406b6f2c01a54c34fe1f3ddd07a7c
         element: <Notifications />,
       },
       {

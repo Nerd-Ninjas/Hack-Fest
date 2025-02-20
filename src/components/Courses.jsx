@@ -27,7 +27,7 @@ export const Courses = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#1e1e2e] to-[#0f172a] text-white py-12 px-5 md:px-20">
+    <div className="min-h-screen mt-10 bg-gradient-to-br from-[#1e1e2e] to-[#0f172a] text-white py-12 px-5 md:px-20">
       <h1 className="text-4xl font-bold text-center mb-10" data-aos="fade-down">
         Explore Our Courses
       </h1>
