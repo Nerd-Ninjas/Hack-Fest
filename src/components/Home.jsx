@@ -3,15 +3,18 @@ import About from './About'
 import Steps from './Steps'
 import HeroSection from './HeroSection'
 import { Courses } from './Courses'
+import TopBar from "./TopBar"
+
 
 
 const Home = () => {
   return (
     <>
+      <TopBar />
       <div className="hero-section mt-25">
-      
-      <HeroSection />
-      
+
+        <HeroSection />
+
       </div>
 
       <div className="about-section">
@@ -21,9 +24,15 @@ const Home = () => {
         <Steps />
       </div>
       <div className='courses' >
-        <Courses/>
+        <Courses />
 
       </div>
+
+
+      <footer className="flex justify-center items-center ">
+        <p className="font-bold text-xl ">Design and Developed by Nerd Ninjas</p>
+      </footer>
+
     </>
   )
 }

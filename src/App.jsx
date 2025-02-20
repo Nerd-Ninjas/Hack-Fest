@@ -1,6 +1,5 @@
-import TopBar from "./components/TopBar"
 import Home from "./components/Home"
-import { BrowserRouter as Router } from "react-router"
+import { BrowserRouter as Router, Routes, Route } from "react-router"
 
 
 
@@ -11,21 +10,15 @@ function App() {
     <>
       <Router>
         <div className="App overflow-hidden" >
-          <div className="landing-page">
-            <TopBar />
-            <div className="landing-content">
+    
+         
+            <Routes>
 
-              <Home />
+              <Route path='/' element={<Home />}></Route>
 
+            </Routes>
 
-            </div>
-
-            <footer className="flex justify-center items-center ">
-              <p className="font-bold text-xl ">Design and Developed by Nerd Ninjas</p>
-            </footer>
-
-          </div>
-
+   
 
 
         </div>

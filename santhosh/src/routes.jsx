@@ -22,25 +22,25 @@ export const routes = [
       {
         icon: <HomeIcon {...icon} />,
         name: "dashboard",
-        path: "/home",
+        // path: "/home",
         element: <Home />,
       },
       {
         icon: <UserCircleIcon {...icon} />,
         name: "profile",
-        path: "/profile",
+        // path: "/profile",
         element: <Profile />,
       },
       {
         icon: <TableCellsIcon {...icon} />,
         name: "Report",
-        path: "/tables",
+        // path: "/tables",
         element: <Tables />,
       },
       {
         icon: <InformationCircleIcon {...icon} />,
         name: "Learning Path",
-        path: "/notifications",
+        // path: "/learning-path",
         element: <Notifications />,
       },
       {
