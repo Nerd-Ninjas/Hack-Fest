@@ -10,10 +10,10 @@ const courses = [
   { id: 4, title: "Cyber Security Basics", image: "src/assets/course/cyber.jpg", category: "Tech" },
   
   
-  { id: 5, title: "Maths", image: "src/assets/course/maths.jpeg", category: "Other" },
-  { id: 6, title: "Digital Marketing Pro", image: "src/assets/course/digital.jpeg", category: "Other" },
-  { id: 7, title: "Music Production Basics", image: "src/assets/course/music.jpeg", category: "Other" },
-  { id: 8, title: "Photography Essentials", image: "src/assets/course/photo.webp", category: "Other" }
+  { id: 5, title: "Graphic Design Mastery", image: "src/assets/course/python.webp", category: "Other" },
+  { id: 6, title: "Digital Marketing Pro", image: "src/assets/course/web3.webp", category: "Other" },
+  { id: 7, title: "Music Production Basics", image: "src/assets/course/reactjs.png", category: "Other" },
+  { id: 8, title: "Photography Essentials", image: "src/assets/course/cyber.jpg", category: "Other" }
 ];
 
 export const Courses = () => {
