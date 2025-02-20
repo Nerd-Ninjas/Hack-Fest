@@ -11,7 +11,7 @@ const Home = () => {
   return (
     <>
       <TopBar />
-      <div className="hero-section mt-25">
+      <div className="hero-section">
 
         <HeroSection />
 

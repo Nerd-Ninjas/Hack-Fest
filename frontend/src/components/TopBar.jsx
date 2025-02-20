@@ -31,7 +31,7 @@ const NavBar = () => {
           </ul>
           <div>
 
-            <Link to='/create'>
+            <Link to='/dashboard'>
               <button className='hidden lg:flex text-white contact-btn p-3 text-xl mr-15 rounded-md duration-500  flex items-center'>
               <p className='text-3xl'><RiDashboardHorizontalFill /></p><p className=''>Dashboard</p>
               </button>
@@ -62,7 +62,7 @@ const NavBar = () => {
               ))
             }
             
-            <Link to='/create'>
+            <Link to='/dashboard'>
               <button className='hidden lg:flex text-white contact-btn p-3 text-xl mr-15 rounded-md duration-500  flex items-center'>
               <p className='text-3xl'><RiDashboardHorizontalLine /></p><p className=''>Dashboard</p>
               </button>

@@ -49,6 +49,24 @@ export const routes = [
         path: "/course",
         element: <Course />,
       },
+      {
+        icon: <ServerStackIcon {...icon} />,
+        name: "Log out",
+        path: "/log-out",
+        element: <SignIn />,
+      },
+      {
+        icon: <ServerStackIcon {...icon} />,
+        name: "Log out",
+        path: "/sign-in",
+        element: <SignIn />,
+      },
+      {
+        icon: <ServerStackIcon {...icon} />,
+        name: "Log out",
+        path: "/sign-up",
+        element: <SignUp/>,
+      },
     ],
   },
   {
@@ -56,16 +74,34 @@ export const routes = [
     layout: "auth",
     pages: [
       {
-        icon: <ServerStackIcon {...icon} />,
-        name: "sign in",
+        // icon: <ServerStackIcon {...icon} />,
+        // name: "Log out",
+        path: "/log-out",
+        element: <SignIn />,
+      },
+    ],
+  },
+  {
+    title: "auth pages",
+    layout: "auth",
+    pages: [
+      {
+        // icon: <ServerStackIcon {...icon} />,
+        // name: "Log out",
         path: "/sign-in",
         element: <SignIn />,
       },
+    ],
+  },
+  {
+    title: "auth pages",
+    layout: "auth",
+    pages: [
       {
-        icon: <RectangleStackIcon {...icon} />,
-        name: "sign up",
+        // icon: <ServerStackIcon {...icon} />,
+        // name: "Log out",
         path: "/sign-up",
-        element: <SignUp />,
+        element: <SignUp/>,
       },
     ],
   },
