@@ -8,7 +8,7 @@ import { Courses } from './Courses'
 const Home = () => {
   return (
     <>
-      <div className="hero-section">
+      <div className="hero-section mt-25">
       
       <HeroSection />
       

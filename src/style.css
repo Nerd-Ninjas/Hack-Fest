@@ -90,6 +90,9 @@ nav {
     border-radius: 5px;
     box-shadow: 2px 4px 5px rgba(255, 255, 255, 0.4);
 }
+.hero-section-img{
+    width: 100%;
+}
 
 /* aboutus  */
 
@@ -128,14 +131,14 @@ grid-template-columns: repeat(2,1fr);
 margin-top: 6rem;
 gap: 2rem;
 }
-.about-section-point{
+.about-section-points .about-section-point{
     border-radius: 3px;
     padding: 2rem;
     border-radius: 5px;
     border: 2px solid var(--main-dark);
 transition: 0.5s;
 }
-.about-section-point:hover{
+.about-section-points .about-section-point:hover{
     background: var(--bs-yellow);
     transform: translate(2px,-2px);
 
@@ -192,4 +195,39 @@ footer{
     background: var(--main-dark);
     color: var(--bs-white);
     padding: 2rem;
+}
+
+
+@media screen and (max-width:768px) {
+    .steps-main{
+        grid-template-columns: repeat(1,1fr);
+        padding: 2rem;
+    }
+    .about-section {
+        flex-direction: column;
+    }
+    .hero-section-content {
+        height: 780px;
+    }
+    .about-section-points{
+        grid-template-columns: repeat(1,1fr);
+        padding: 2rem;
+    }.about-section-image img{
+ 
+
+        width: 380px;
+        height: 280px;
+    }
+    .about-section-image{
+        width: 380px;
+        height: 280px;
+        transform: translate(0,0);
+        margin-left: 1rem;
+    }
+    .about-section-points{
+        margin-top: 2rem;
+    }
+    .about-section-content h2{
+        padding: 1rem;
+    }
 }
