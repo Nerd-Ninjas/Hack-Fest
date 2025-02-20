@@ -5,7 +5,7 @@ import requests
 
 app = Flask(__name__)
 CORS(app)  
-
+# updated API
 API_KEY = "AIzaSyDGw_PMvwBXacvyTHWF8JWBk_hL9DSP-vk"
 YOUTUBE_API_KEY = "AIzaSyBmlz5MQ1UJ7V6Evc9xgq4RXor5i9aOw3g"
 genai.configure(api_key=API_KEY)
