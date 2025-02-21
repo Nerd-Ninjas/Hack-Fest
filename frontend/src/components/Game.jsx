@@ -20,14 +20,7 @@ export const Game = () => {
             Embark on an adventure where your skills determine your fate. Fight, strategize, 
             and conquer to become the ultimate champion.
           </Typography>
-          <Button
-            variant="gradient"
-            color="yellow"
-            className="mt-6"
-            onClick={() => window.location.href = "/gameplay"}
-          >
-            Start Your Journey
-          </Button>
+     
         </div>
 
         {/* Right Side - Game Image & Link */}
@@ -38,7 +31,7 @@ export const Game = () => {
             className="w-full h-full object-cover"
           />
           <a
-            href="http://localhost:5000"
+            href="http://192.168.43.180:3000/"
             className="absolute bottom-4 right-4 bg-yellow-500 text-black px-4 py-2 rounded-lg hover:bg-yellow-600 transition"
           >
             Play Now

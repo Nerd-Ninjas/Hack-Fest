@@ -9,6 +9,7 @@ import {
 import { Home, Profile, Tables, Notifications } from "@/pages/dashboard";
 import { SignIn, SignUp } from "@/pages/auth";
 import Course from "./pages/dashboard/Course";
+import PersonalInfo from "./pages/dashboard/personalinfo";
 import { SiCoursera } from "react-icons/si";
 
 const icon = {
@@ -48,6 +49,12 @@ export const routes = [
         name: "Course",
         path: "/course",
         element: <Course />,
+      },
+      {
+        icon: <SiCoursera />,
+        name: "personalinfo",
+        path: "/personalinfo",
+        element: <PersonalInfo />,
       },
       {
         icon: <ServerStackIcon {...icon} />,

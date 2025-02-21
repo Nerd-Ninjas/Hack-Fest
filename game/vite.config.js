@@ -6,12 +6,7 @@ export default defineConfig({
     minify: "terser",
   },
   server: {
-    proxy: {
-      "/game": {
-        target: "http://localhost:5000", 
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/game/, ""),
-      },
-    },
+    port:3000,
+   
   },
 });
