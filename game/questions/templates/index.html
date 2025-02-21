@@ -18,39 +18,38 @@
     }
 
     #quiz-container {
-    background-color: #121212; 
-    padding: 30px;
-    border-radius: 15px;
-    box-shadow: 0 8px 25px rgba(255, 255, 255, 0.1);
-    width: 400px;
-    text-align: center;
-    animation: fade-in 1s;
-    color: #e4cfcf; 
-    border: 2px solid rgba(255, 255, 255, 0.2);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
+      background-color: #121212; 
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 8px 25px rgba(255, 255, 255, 0.1);
+      width: 400px;
+      text-align: center;
+      animation: fade-in 1s;
+      color: #e4cfcf; 
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
 
+    #quiz-container:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 30px rgba(255, 255, 255, 0.3);
+    }
 
-#quiz-container:hover {
-    transform: scale(1.05);
-    box-shadow: 0 10px 30px rgba(255, 255, 255, 0.3);
-}
-
-@keyframes fade-in {
-    from {
+    @keyframes fade-in {
+      from {
         opacity: 0;
         transform: translateY(-20px);
-    }
-    to {
+      }
+      to {
         opacity: 1;
         transform: translateY(0);
+      }
     }
-}
-.backdrop {
-    backdrop-filter: blur(10px);
-    background: rgba(18, 18, 18, 0.75);
-}
-
+    
+    .backdrop {
+      backdrop-filter: blur(10px);
+      background: rgba(18, 18, 18, 0.75);
+    }
 
     h1 {
       color: #ffffff;
@@ -172,11 +171,6 @@
       font-size: 18px;
       margin-bottom: 20px;
     }
-
-    #timer {
-      font-size: 18px;
-      margin-bottom: 20px;
-    }
   </style>
 </head>
 <body>
@@ -187,7 +181,6 @@
       <div id="progress"></div>
     </div>
     <p id="score-display">Score: 0</p>
-    <p id="timer">Time Left: 10</p>
     <p id="question-text">What is the output of `print(2 + 2)`?</p>
     <input type="text" id="answer-input" placeholder="Enter your answer here...">
     <button onclick="checkAnswer()">Submit</button>
@@ -195,7 +188,7 @@
     <p id="correct-message">Correct! Moving to the next question...</p>
     <p id="wrong-message">Wrong answer. Try again or check the hint!</p>
   </div>
-  <img src="Python.png" alt="Python Image" class="python-image">
+  <!-- <img src="/game/public/Python.png" alt="Python Image" class="python-image"> -->
 
   <script>
     const questions = [
@@ -223,25 +216,8 @@
 
     let currentQuestionIndex = 0;
     let correctAnswersCount = 0;
-    let timeLeft = 10;
-    let timer;
-
-    function startTimer() {
-      timer = setInterval(() => {
-        timeLeft--;
-        document.getElementById("timer").textContent = `Time Left: ${timeLeft}`;
-        if (timeLeft <= 0) {
-          clearInterval(timer);
-          showHint();
-          document.getElementById("wrong-message").textContent = "Time's up! Showing hint.";
-          document.getElementById("wrong-message").style.display = "block";
-          setTimeout(nextQuestion, 2000); 
-        }
-      }, 1000);
-    }
 
     function checkAnswer() {
-      clearInterval(timer); 
       const userAnswer = document.getElementById("answer-input").value.trim();
       const correctAnswer = questions[currentQuestionIndex].answer;
 
@@ -256,7 +232,6 @@
         showHint();
       }
 
-      
       setTimeout(nextQuestion, 2000);
     }
 
@@ -276,15 +251,12 @@
     }
 
     function loadQuestion() {
-      timeLeft = 10; 
-      document.getElementById("timer").textContent = `Time Left: ${timeLeft}`;
       document.getElementById("hint-text").style.display = "none";
       document.getElementById("correct-message").style.display = "none";
       document.getElementById("wrong-message").style.display = "none";
       document.getElementById("answer-input").value = "";
       document.getElementById("question-text").textContent = questions[currentQuestionIndex].question;
       updateProgressBar();
-      startTimer();
     }
 
     function updateScore() {
@@ -297,7 +269,6 @@
     }
 
     function endQuiz() {
-      clearInterval(timer);
       document.getElementById("quiz-container").innerHTML = `
         <h1>Quiz Complete!</h1>
         <p>Your final score is: ${correctAnswersCount} / ${questions.length}</p>
@@ -311,7 +282,6 @@
       loadQuestion();
     }
 
-    
     window.onload = function () {
       loadQuestion();
     };
