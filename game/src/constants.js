@@ -36,5 +36,5 @@ export const dialogueData = {
   Unicode Code Point (ord()): The ord() function returns the Unicode code point of a character. For example, ord('A') returns 65, which is the Unicode number for the character 'A'.
   Character from Code Point (chr()): The chr() function converts a Unicode code point back to a character. For example, chr(97) returns 'a', which is the character corresponding to the Unicode code 97.<a href="https://youtu.be/CxeP1dQi9rg?si=TUD-T3WlxtfBnwPT" target="_blank">Learn More</a>`,
 
-  exit: `Check your knowledge <a href="http://127.0.0.1:5000" target="_blank">Take Test!!</a>`,
+  exit: `Check your knowledge <a href="http://127.0.0.1:9000/" target="_blank">Take Test!!</a>`,
 };

@@ -10,6 +10,7 @@ import { Home, Profile, Tables, Notifications } from "@/pages/dashboard";
 import { SignIn, SignUp } from "@/pages/auth";
 import Course from "./pages/dashboard/Course";
 import PersonalInfo from "./pages/dashboard/personalinfo";
+
 import { SiCoursera } from "react-icons/si";
 
 const icon = {
@@ -23,13 +24,13 @@ export const routes = [
       {
         icon: <HomeIcon {...icon} />,
         name: "dashboard",
-        // path: "/home",
+        path: "/home",
         element: <Home />,
       },
       {
         icon: <UserCircleIcon {...icon} />,
         name: "profile",
-        // path: "/profile",
+        path: "/profile",
         element: <Profile />,
       },
       {
@@ -41,7 +42,7 @@ export const routes = [
       {
         icon: <InformationCircleIcon {...icon} />,
         name: "Learning Path",
-        // path: "/learning-path",
+        path: "/learning-roadmap",
         element: <Notifications />,
       },
       {

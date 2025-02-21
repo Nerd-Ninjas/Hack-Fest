@@ -1,6 +1,7 @@
 from flask import Flask, session
 from flask_cors import CORS
 from components.auth import auth_routes 
+from components.dashboard import dashboard_routes 
 from components.connection import connection 
 import os
 
