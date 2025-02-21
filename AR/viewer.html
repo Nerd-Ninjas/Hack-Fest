@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{{ model_name }}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="{{ url_for('static', filename='3dmodel.css') }}" rel="stylesheet">
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            position: relative;
+        }
+
+        #model-container {
+            width: 50%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .text-box {
+            position: absolute;
+            width: 20%;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            transition: opacity 0.5s ease-in-out;
+            opacity: 1;
+        }
+
+        #left-text {
+            left: 5%;
+        }
+
+        #right-text {
+            right: 5%;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Left Text Box -->
+    <div id="left-text" class="text-box">{{ left_text }}</div>
+
+    <!-- 3D Model Viewer -->
+    <div id="model-container">
+        <model-viewer src="{{ model_path }}" alt="{{ model_name }}" shadow-intensity="1" 
+            camera-controls auto-rotate ar style="width: 100%; height: 100%;" autoplay>
+        </model-viewer>
+    </div>
+
+    <!-- Right Text Box -->
+    <div id="right-text" class="text-box">{{ right_text }}</div>
+
+</body>
+</html>
