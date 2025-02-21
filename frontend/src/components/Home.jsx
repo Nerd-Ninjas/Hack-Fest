@@ -4,6 +4,7 @@ import Steps from './Steps'
 import HeroSection from './HeroSection'
 import { Courses } from './Courses'
 import TopBar from "./TopBar"
+import { Game } from './Game'
 
 
 
@@ -25,6 +26,11 @@ const Home = () => {
       </div>
       <div className='courses' >
         <Courses />
+
+      </div>
+      <div className='game' >
+
+        <Game/>
 
       </div>
 

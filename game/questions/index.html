@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gamified Test</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: radial-gradient(circle, rgba(137, 207, 240, 1) 0%, rgba(70, 130, 180, 1) 100%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      color: #333;
+      overflow: hidden;
+    }
+
+    #quiz-container {
+    background-color: #121212; 
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(255, 255, 255, 0.1);
+    width: 400px;
+    text-align: center;
+    animation: fade-in 1s;
+    color: #e4cfcf; 
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+#quiz-container:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 30px rgba(255, 255, 255, 0.3);
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+.backdrop {
+    backdrop-filter: blur(10px);
+    background: rgba(18, 18, 18, 0.75);
+}
+
+
+    h1 {
+      color: #ffffff;
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+
+    #question-text {
+      font-size: 20px;
+      margin-bottom: 20px;
+      font-weight: bold;
+      animation: slide-in 0.5s ease-out;
+    }
+
+    #answer-input {
+      padding: 12px;
+      width: 100%;
+      font-size: 16px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      outline: none;
+      margin-bottom: 10px;
+    }
+
+    button {
+      background-color: #30e1e7;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 10px;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    #hint-text {
+      margin-top: 15px;
+      font-size: 16px;
+      color: #ff6347;
+      display: none;
+      animation: fade-in 1s;
+    }
+
+    #correct-message {
+      color: green;
+      font-size: 18px;
+      display: none;
+      animation: fade-in 1s;
+    }
+
+    #wrong-message {
+      color: red;
+      font-size: 18px;
+      display: none;
+      animation: shake 0.5s;
+    }
+
+    @keyframes fade-in {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slide-in {
+      from { transform: translateX(-50px); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-10px); }
+      40%, 80% { transform: translateX(10px); }
+    }
+
+    .python-image {
+      width: 200px;
+      height: auto;
+      border-radius: 15px;
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+      border: 2px solid #ccc;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: absolute;
+      top: 50px;
+      left: 20px;
+    }
+
+    .logo {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      z-index: 1000;
+    }
+
+    .logo:hover {
+      transform: scale(1.1);
+      box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    #progress-bar {
+      width: 100%;
+      background-color: #f3f3f3;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+
+    #progress {
+      width: 0%;
+      height: 10px;
+      background-color: #30e1e7;
+      border-radius: 10px;
+      transition: width 0.5s ease;
+    }
+
+    #score-display {
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+
+    #timer {
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="quiz-container">
+    <h1>Gamified Test</h1>
+    <div id="progress-bar">
+      <div id="progress"></div>
+    </div>
+    <p id="score-display">Score: 0</p>
+    <p id="timer">Time Left: 10</p>
+    <p id="question-text">What is the output of `print(2 + 2)`?</p>
+    <input type="text" id="answer-input" placeholder="Enter your answer here...">
+    <button onclick="checkAnswer()">Submit</button>
+    <p id="hint-text">Hint: Think about simple addition in Python.</p>
+    <p id="correct-message">Correct! Moving to the next question...</p>
+    <p id="wrong-message">Wrong answer. Try again or check the hint!</p>
+  </div>
+  <img src="Python.png" alt="Python Image" class="python-image">
+
+  <script>
+    const questions = [
+      { question: "What is the output of `print(2 + 2)`?", answer: "4", hint: "Think about simple addition." },
+      { question: "What is the output of `len('hello')`?", answer: "5", hint: "Count the number of characters." },
+      { question: "What is the result of `5 // 2`?", answer: "2", hint: "Integer division result." },
+      { question: "What does `print(10 % 3)` output?", answer: "1", hint: "Think about the remainder." },
+      { question: "What does `range(5)[-1]` return?", answer: "4", hint: "Check the last element of the range." },
+      { question: "What is the output of `2 ** 3`?", answer: "8", hint: "It represents 2 raised to the power of 3." },
+      { question: "What does `print(type(3.14))` display?", answer: "<class 'float'>", hint: "Think about the type of a decimal number." },
+      { question: "What is the result of `bool([])`?", answer: "False", hint: "An empty list is considered False." },
+      { question: "What does `print('Hello'.upper())` return?", answer: "HELLO", hint: "Converts the string to uppercase." },
+      { question: "What is the output of `'Python'[::-1]`?", answer: "nohtyP", hint: "Reverse the string." },
+      { question: "What is the value of `3 * 'A'`?", answer: "AAA", hint: "Repeat the string 3 times." },
+      { question: "What does `list(range(3))` return?", answer: "[0, 1, 2]", hint: "A list containing numbers from 0 to 2." },
+      { question: "What is the result of `' '.join(['a', 'b', 'c'])`?", answer: "a b c", hint: "Joins the list with a space." },
+      { question: "What is `sum([1, 2, 3])`?", answer: "6", hint: "Sum of the list elements." },
+      { question: "What does `int('10') + int('5')` return?", answer: "15", hint: "Convert both strings to integers before adding." },
+      { question: "What does `{'a': 1}.get('b', 0)` return?", answer: "0", hint: "Returns the default value when the key is not found." },
+      { question: "What is the result of `min([7, 1, 9])`?", answer: "1", hint: "Find the smallest number." },
+      { question: "What is the output of `ord('A')`?", answer: "65", hint: "Returns the Unicode code point of the character." },
+      { question: "What does `chr(97)` return?", answer: "a", hint: "Convert the Unicode code to a character." },
+      { question: "What is the result of `True and False`?", answer: "False", hint: "Logical AND operation." }
+    ];
+
+    let currentQuestionIndex = 0;
+    let correctAnswersCount = 0;
+    let timeLeft = 10;
+    let timer;
+
+    function startTimer() {
+      timer = setInterval(() => {
+        timeLeft--;
+        document.getElementById("timer").textContent = `Time Left: ${timeLeft}`;
+        if (timeLeft <= 0) {
+          clearInterval(timer);
+          showHint();
+          document.getElementById("wrong-message").textContent = "Time's up! Showing hint.";
+          document.getElementById("wrong-message").style.display = "block";
+          setTimeout(nextQuestion, 2000); 
+        }
+      }, 1000);
+    }
+
+    function checkAnswer() {
+      clearInterval(timer); 
+      const userAnswer = document.getElementById("answer-input").value.trim();
+      const correctAnswer = questions[currentQuestionIndex].answer;
+
+      if (userAnswer === correctAnswer) {
+        correctAnswersCount++;
+        document.getElementById("correct-message").style.display = "block";
+        document.getElementById("wrong-message").style.display = "none";
+        updateScore();
+      } else {
+        document.getElementById("wrong-message").style.display = "block";
+        document.getElementById("wrong-message").textContent = "Wrong answer. Showing hint.";
+        showHint();
+      }
+
+      
+      setTimeout(nextQuestion, 2000);
+    }
+
+    function showHint() {
+      const hint = questions[currentQuestionIndex].hint;
+      document.getElementById("hint-text").textContent = `Hint: ${hint}`;
+      document.getElementById("hint-text").style.display = "block";
+    }
+
+    function nextQuestion() {
+      currentQuestionIndex++;
+      if (currentQuestionIndex >= questions.length) {
+        endQuiz();
+      } else {
+        loadQuestion();
+      }
+    }
+
+    function loadQuestion() {
+      timeLeft = 10; 
+      document.getElementById("timer").textContent = `Time Left: ${timeLeft}`;
+      document.getElementById("hint-text").style.display = "none";
+      document.getElementById("correct-message").style.display = "none";
+      document.getElementById("wrong-message").style.display = "none";
+      document.getElementById("answer-input").value = "";
+      document.getElementById("question-text").textContent = questions[currentQuestionIndex].question;
+      updateProgressBar();
+      startTimer();
+    }
+
+    function updateScore() {
+      document.getElementById("score-display").textContent = `Score: ${correctAnswersCount}`;
+    }
+
+    function updateProgressBar() {
+      const progressPercent = ((currentQuestionIndex + 1) / questions.length) * 100;
+      document.getElementById("progress").style.width = `${progressPercent}%`;
+    }
+
+    function endQuiz() {
+      clearInterval(timer);
+      document.getElementById("quiz-container").innerHTML = `
+        <h1>Quiz Complete!</h1>
+        <p>Your final score is: ${correctAnswersCount} / ${questions.length}</p>
+        <button onclick="restartQuiz()">Restart Quiz</button>
+      `;
+    }
+
+    function restartQuiz() {
+      currentQuestionIndex = 0;
+      correctAnswersCount = 0;
+      loadQuestion();
+    }
+
+    
+    window.onload = function () {
+      loadQuestion();
+    };
+  </script>
+
+</body>
+</html>
