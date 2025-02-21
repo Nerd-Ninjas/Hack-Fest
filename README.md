@@ -42,6 +42,17 @@ Our sustainable revenue streams include:
 | **Mr. G. Sandhosh** | Team Member | B.Tech AI&DS (III) | Frontend Developer |
 | **Mr. S. Pranav** | Team Member | B.Tech AI&DS (III) | Key Speaker & UI Developer |
 
+## 📸 Screenshots  
+
+![Screenshot 1](Readme\1.png)  
+![Screenshot 2](Readme\2.png)  
+![Screenshot 3](Readme\3.png)  
+![Screenshot 4](sReadme\4.png)  
+![Screenshot 5](Readme\5.png)  
+![Screenshot 6](Readme\6.png)  
+![Screenshot 7](Readme\7.png)  
+![Screenshot 8](Readme\8.png) 
+
 ---
 
 📢 *Transforming education with AI-powered personalization!* 🚀  
