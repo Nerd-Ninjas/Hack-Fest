@@ -4,7 +4,7 @@ import { interestsData } from "../../components/Constants";
 import { useAuth } from "../auth/AuthContext";
 
 const PersonalInfo = () => {
-  const { usermail } = useAuth();
+  const {usermail } = useAuth();
   const [userType, setUserType] = useState("");
   const [image, setImage] = useState(null);
   const [bio, setBio] = useState("");

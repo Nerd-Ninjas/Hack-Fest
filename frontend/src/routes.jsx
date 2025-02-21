@@ -22,8 +22,8 @@ export const routes = [
     layout: "dashboard",
     pages: [
       {
-        icon: <HomeIcon {...icon} />,
-        name: "dashboard",
+        // icon: <HomeIcon {...icon} />,
+        // name: "dashboard",
         // path: "/home",
         element: <Home />,
       },

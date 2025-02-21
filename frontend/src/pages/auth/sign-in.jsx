@@ -32,7 +32,7 @@ export function SignIn() {
       });
   
       localStorage.setItem("sessionEmail", response.data.session);
-      navigate("/dashboard");
+      navigate("/dashboard/profile");
     } catch (error) {
       if (error.response) {
         setMessage(error.response.data.message || "Login failed. Please try again.");
