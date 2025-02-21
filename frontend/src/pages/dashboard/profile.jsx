@@ -42,7 +42,7 @@ export function Profile() {
           <div className="flex flex-col md:flex-row items-center gap-6">
             {/* Profile Image */}
             <Avatar
-              src={userData.img_url}
+              src="../../../profilenew.png"
               alt="Profile"
               size="xl"
               variant="circular"
