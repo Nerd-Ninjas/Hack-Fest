@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import axios from "axios";
 import { interestsData } from "../../components/Constants";
+import { useAuth } from "../auth/AuthContext";
 
 const PersonalInfo = () => {
+  const { usermail } = useAuth();
   const [userType, setUserType] = useState("");
   const [image, setImage] = useState(null);
   const [bio, setBio] = useState("");
@@ -10,7 +12,7 @@ const PersonalInfo = () => {
   const [selectedSkills, setSelectedSkills] = useState({});
   const [loading, setLoading] = useState(false);
 
-  // Handle image upload and preview
+
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -20,7 +22,7 @@ const PersonalInfo = () => {
     }
   };
 
-  // Toggle interest selection (max 2)
+
   const handleInterestChange = (interest) => {
     if (selectedInterests.includes(interest)) {
       setSelectedInterests(selectedInterests.filter((i) => i !== interest));
@@ -34,7 +36,7 @@ const PersonalInfo = () => {
     }
   };
 
-  // Toggle skill selection for an interest
+
   const handleSkillChange = (interest, skill) => {
     setSelectedSkills((prev) => {
       const skills = prev[interest] || [];
@@ -47,11 +49,12 @@ const PersonalInfo = () => {
     });
   };
 
-  // Handle form submission
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const userData = {
+      email:usermail,
       user_type: userType,
       personal_info: bio,
       img_url: image || "",
@@ -62,9 +65,9 @@ const PersonalInfo = () => {
 
     try {
       setLoading(true);
-      console.log("Submitting data:", JSON.stringify(userData, null, 2)); // Pretty-print payload
+      console.log("Submitting data:", JSON.stringify(userData, null, 2));
       const response = await axios.post(
-        "http://127.0.0.1:2000/info/userinfo",
+        "http://192.168.43.180:2000/info/userinfo",
         userData,
         {
           headers: { "Content-Type": "application/json" },

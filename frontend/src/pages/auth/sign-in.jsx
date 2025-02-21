@@ -2,8 +2,11 @@ import { useState } from "react";
 import { Input, Button, Typography } from "@material-tailwind/react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import usePageTitle from "../../components/usePageTitle"
 
 export function SignIn() {
+
+  usePageTitle("Sign In | Nerd Learn");
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -13,28 +16,23 @@ export function SignIn() {
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
 
-  // Handle input change
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setMessage("");
-
+  
     try {
-      const response = await axios.post("http://127.0.0.1:2000/auth/login", formData, {
+      const response = await axios.post("http://192.168.43.180:2000/auth/login", formData, {
         headers: { "Content-Type": "application/json" },
+        withCredentials: true,
       });
-
-      // Assuming the backend returns a token upon successful login
-      const { token } = response.data;
-      localStorage.setItem("authToken", token);
-
-      setMessage("Login successful!");
-      navigate("/dashboard"); // Redirect to the dashboard
+  
+      localStorage.setItem("sessionEmail", response.data.session);
+      navigate("/dashboard");
     } catch (error) {
       if (error.response) {
         setMessage(error.response.data.message || "Login failed. Please try again.");
@@ -42,10 +40,10 @@ export function SignIn() {
         setMessage("Network error. Please check your connection.");
       }
     }
-
+  
     setLoading(false);
   };
-
+  
   return (
     <section className="m-8 flex gap-4">
       <div className="w-full lg:w-3/5 mt-24">

@@ -13,7 +13,7 @@ import {
 } from "@material-tailwind/react";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-// Initialize Gemini AI
+
 const genAI = new GoogleGenerativeAI("AIzaSyDGw_PMvwBXacvyTHWF8JWBk_hL9DSP-vk");
 
 export function Notifications() {
@@ -31,7 +31,7 @@ export function Notifications() {
     try {
       const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
 
-      // Ensure the AI provides YouTube links properly formatted
+
       const prompt = `Generate a structured learning roadmap for "${course}" with:
       - Key learning steps, each in a Markdown list.
       - Courses, books, and YouTube videos.

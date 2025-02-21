@@ -27,7 +27,7 @@ export function SignUp() {
     setMessage("");
 // api Post
     try {
-      const response = await axios.post("http://127.0.0.1:2000/auth/register", formData, {
+      const response = await axios.post("http://192.168.43.180:2000/auth/register", formData, {
         headers: { "Content-Type": "application/json" },
       });
 

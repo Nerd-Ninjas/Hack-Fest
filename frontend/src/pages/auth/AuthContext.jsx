@@ -1,37 +1,50 @@
-import { createContext, useContext, useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { createContext, useContext, useEffect, useState } from "react";
+import axios from "axios";
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const navigate = useNavigate();
   const [user, setUser] = useState(null);
-
-  // Load user data on app start
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
-    const token = localStorage.getItem("authToken");
-    const email = localStorage.getItem("userEmail");
-
-    if (token && email) {
-      setUser({ token, email });
-    }
+    console.log("AuthProvider Mounted. User:", user);
+  }, [user]);
+  
+  useEffect(() => {
+    const checkSession = async () => {
+      try {
+        const response = await axios.get("http://192.168.43.180:2000/auth/session", { withCredentials: true });
+        if (response.data.logged_in) {
+          setUser(response.data.email);
+        } else {
+          setUser(null);
+        }
+      } catch (error) {
+        console.error("Session check failed:", error);1
+        setUser(null);
+      }
+      setLoading(false);
+    };
+  
+    checkSession();
+    const interval = setInterval(checkSession, 5 * 60 * 1000); 
+  
+    return () => clearInterval(interval); 
   }, []);
+  
 
-  const login = (token, email) => {
-    localStorage.setItem("authToken", token);
-    localStorage.setItem("userEmail", email);
-    setUser({ token, email });
-  };
 
-  const logout = () => {
-    localStorage.removeItem("authToken");
-    localStorage.removeItem("userEmail");
-    setUser(null);
-    navigate("/auth/sign-in", { replace: true });
+  const logout = async () => {
+    try {
+      await axios.post("http://192.168.43.180:2000/auth/logout", {}, { withCredentials: true });
+      setUser(null);
+    } catch (error) {
+      console.error("Logout failed:", error);
+    }
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider value={{ user, loading, logout }}>
       {children}
     </AuthContext.Provider>
   );
