@@ -26,8 +26,15 @@ import {
   setOpenConfigurator,
   setOpenSidenav,
 } from "@/context";
+import { useAuth } from "../../pages/auth/AuthContext";
+
 
 export function DashboardNavbar() {
+  const { logout } = useAuth();
+  const handleLogout = async () => {
+    await logout(); 
+    window.location.href = "/auth/sign-in"; 
+  };
   const [controller, dispatch] = useMaterialTailwindController();
   const { fixedNavbar, openSidenav } = controller;
   const { pathname } = useLocation();
@@ -74,15 +81,16 @@ export function DashboardNavbar() {
         </div>
         <div className="flex items-center">
    
-          <Link to="/auth/sign-in">
-            <Button
-              variant="text"
-              color="blue-gray"
-              className="hidden items-center gap-1 px-4 xl:flex normal-case"
-            >
-              <ArrowLeftOnRectangleIcon className="h-5 w-5 text-blue-gray-500" />
-              LogOut
-            </Button>
+          <Link >
+          <Button
+          variant="text"
+          color="blue-gray"
+          className="hidden items-center gap-1 px-4 xl:flex normal-case"
+          onClick={handleLogout} // Call logout function
+        >
+          <ArrowLeftOnRectangleIcon className="h-5 w-5 text-blue-gray-500" />
+          LogOut
+        </Button>
             <IconButton
               variant="text"
               color="blue-gray"

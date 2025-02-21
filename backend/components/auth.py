@@ -48,9 +48,18 @@ def login():
         session['email'] = email
         session['logged_in'] = True
         session.modified = True
-        return jsonify({'message': "Login Successful"}), 200
+        
+        return jsonify({
+            'message': "Login Successful",
+            'session': session.get('email')  
+        }), 200
     
     return jsonify({"message": "Invalid email or password"}), 401
+@auth_routes.route("/session", methods=["GET"])
+def check_session():
+    if 'logged_in' in session and session['logged_in']:
+        return jsonify({"logged_in": True, "email": session.get('email')}), 200
+    return jsonify({"logged_in": False}), 401
 
 # 🔹 User Logout
 @auth_routes.route("/logout", methods=['POST'])

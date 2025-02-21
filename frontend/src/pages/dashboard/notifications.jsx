@@ -1,86 +1,123 @@
-import React from "react";
+import React, { useState } from "react";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import remarkBreaks from "remark-breaks";
 import {
   Typography,
   Alert,
   Card,
   CardHeader,
   CardBody,
+  Button,
+  Input,
 } from "@material-tailwind/react";
-import { InformationCircleIcon } from "@heroicons/react/24/outline";
+import { GoogleGenerativeAI } from "@google/generative-ai";
+
+
+const genAI = new GoogleGenerativeAI("AIzaSyDGw_PMvwBXacvyTHWF8JWBk_hL9DSP-vk");
 
 export function Notifications() {
-  const [showAlerts, setShowAlerts] = React.useState({
-    blue: true,
-    green: true,
-    orange: true,
-    red: true,
-  });
-  const [showAlertsWithIcon, setShowAlertsWithIcon] = React.useState({
-    blue: true,
-    green: true,
-    orange: true,
-    red: true,
-  });
-  const alerts = ["gray", "green", "orange", "red"];
+  const [course, setCourse] = useState("");
+  const [roadmap, setRoadmap] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  const fetchRoadmap = async () => {
+    if (!course.trim()) return;
+    setLoading(true);
+    setError(null);
+    setRoadmap("");
+
+    try {
+      const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
+
+
+      const prompt = `Generate a structured learning roadmap for "${course}" with:
+      - Key learning steps, each in a Markdown list.
+      - Courses, books, and YouTube videos.
+      - Provide YouTube links **in Markdown format** using: [Video Title](https://www.youtube.com/watch?v=VIDEO_ID).
+      - Ensure the response is fully formatted in Markdown.`;
+
+      const result = await model.generateContent(prompt);
+      const response = await result.response;
+      const text = response.text();
+
+      setRoadmap(text);
+    } catch (err) {
+      console.error("Error fetching roadmap:", err);
+      setError("Failed to generate roadmap.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Custom Markdown Component for embedding YouTube videos
+  const MarkdownComponents = {
+    a: ({ href, children }) => {
+      const youtubeMatch = href.match(
+        /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([\w-]+)/
+      );
+      if (youtubeMatch) {
+        return (
+          <div className="relative aspect-video my-4">
+            <iframe
+              className="w-full h-full rounded-xl"
+              src={`https://www.youtube.com/embed/${youtubeMatch[1]}`}
+              title={children}
+              allowFullScreen
+            />
+          </div>
+        );
+      }
+      return (
+        <a href={href} target="_blank" rel="noopener noreferrer" className="text-blue-500 underline">
+          {children}
+        </a>
+      );
+    },
+  };
 
   return (
-    <div className="mx-auto my-20 flex max-w-screen-lg flex-col gap-8">
-      <Card>
-        <CardHeader
-          color="transparent"
-          floated={false}
-          shadow={false}
-          className="m-0 p-4"
-        >
+    <div className="mx-auto my-20 flex max-w-screen-lg flex-col gap-8 p-4">
+      {/* Input Section */}
+      <Card className="shadow-lg border border-gray-200">
+        <CardHeader color="transparent" floated={false} shadow={false} className="m-0 p-4">
           <Typography variant="h5" color="blue-gray">
-            Alerts
+            Generate Your Learning Roadmap
           </Typography>
         </CardHeader>
         <CardBody className="flex flex-col gap-4 p-4">
-          {alerts.map((color) => (
-            <Alert
-              key={color}
-              open={showAlerts[color]}
-              color={color}
-              onClose={() => setShowAlerts((current) => ({ ...current, [color]: false }))}
-            >
-              A simple {color} alert with an <a href="#">example link</a>. Give
-              it a click if you like.
-            </Alert>
-          ))}
+          <Input
+            type="text"
+            label="Enter Course Name"
+            value={course}
+            onChange={(e) => setCourse(e.target.value)}
+            className="mb-4"
+          />
+          <Button color="blue" onClick={fetchRoadmap} disabled={loading} className="font-bold">
+            {loading ? "Generating..." : "Generate Roadmap"}
+          </Button>
         </CardBody>
       </Card>
-      <Card>
-        <CardHeader
-          color="transparent"
-          floated={false}
-          shadow={false}
-          className="m-0 p-4"
-        >
-          <Typography variant="h5" color="blue-gray">
-            Alerts with Icon
-          </Typography>
-        </CardHeader>
-        <CardBody className="flex flex-col gap-4 p-4">
-          {alerts.map((color) => (
-            <Alert
-              key={color}
-              open={showAlertsWithIcon[color]}
-              color={color}
-              icon={
-                <InformationCircleIcon strokeWidth={2} className="h-6 w-6" />
-              }
-              onClose={() => setShowAlertsWithIcon((current) => ({
-                ...current,
-                [color]: false,
-              }))}
-            >
-              A simple {color} alert with an <a href="#">example link</a>. Give
-              it a click if you like.
-            </Alert>
-          ))}
-        </CardBody>
-      </Card>
+
+      {/* Roadmap Section */}
+      {roadmap && (
+        <Card className="shadow-lg border border-gray-200">
+          <CardHeader color="transparent" floated={false} shadow={false} className="m-0 p-4">
+            <Typography variant="h5" color="blue-gray">
+              Your Personalized Learning Roadmap
+            </Typography>
+          </CardHeader>
+          <CardBody className="p-4 prose max-w-full prose-lg">
+            <ReactMarkdown components={MarkdownComponents} remarkPlugins={[remarkGfm, remarkBreaks]}>
+              {roadmap}
+            </ReactMarkdown>
+          </CardBody>
+        </Card>
+      )}
+
+      {/* Error Message */}
+      {error && <Alert color="red">{error}</Alert>}
     </div>
   );
 }
